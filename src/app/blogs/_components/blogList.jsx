@@ -1,22 +1,52 @@
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ClockIcon } from "@heroicons/react/24/outline";
+
+import CoverImage from './coverImage';
+
 async function BlogList() {
-  const res = await fetch("http://localhost:5000/api/post/list");
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  const res = await fetch(`http://localhost:5000/api/post/list`);
+  const {
+    data: { posts },
+  } = await res.json();
 
-  const jsonData = await res.json();
-  console.log("Response JSON:", jsonData);
-
-  // Adjust based on actual structure
-  const posts = jsonData.posts || jsonData.data?.posts || [];
-console.log(posts)
-  return (
-    <>
+  return posts.length > 0 ? (
+    <div className="grid grid-cols-12 gap-8">
       {posts.map((post) => (
-
-          <div>{post.title}</div>
-
+        <div className="col-span-12 sm:col-span-6 lg:col-span-4 border border-seondary-100 p-2 rounded-lg" key={post.id}>
+          <CoverImage post={post}/>
+          <div>
+            <Link href={`/blogs/${post.slug}`}>
+              <h2 className="mb-4 font-bold text-secondary-700">
+                {post.title}
+              </h2>
+            </Link>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-x-1">
+                <Image
+                  src={post.author.avatarUrl || "/images/avatar.png"}
+                  width={24}
+                  height={24}
+                  className="rounded-full ring-1 ring-secondary-300 ml-2"
+                  alt={post.author.avatarUrl}
+                />
+                <span className="text-sm text-slate-500">
+                  {post.author.name}
+                </span>
+              </div>
+              <div className="flex items-center text-[10px] text-secondary-500">
+                <ClockIcon className="w-4 h-4 stroke-secondary-500 ml-1" />
+                <span className="ml-1">خواندن:</span>
+                <span className="ml-1 leading-3">{post.readingTime}</span>
+                <span>دقیقه</span>
+              </div>
+            </div>
+          </div>
+        </div>
       ))}
-    </>
-  );
+    </div>
+  ) : null;
 }
 
 export default BlogList;
