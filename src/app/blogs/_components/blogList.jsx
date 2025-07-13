@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ClockIcon } from "@heroicons/react/24/outline";
 
 import CoverImage from './coverImage';
+import PostIntractions from "./postIntractions";
 
 async function BlogList() {
   const res = await fetch(`http://localhost:5000/api/post/list`);
@@ -43,6 +44,7 @@ async function BlogList() {
               </div>
             </div>
           </div>
+          <PostIntractions/>
         </div>
       ))}
     </div>

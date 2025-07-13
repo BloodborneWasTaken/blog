@@ -1,17 +1,21 @@
+"use client";
 import ButtonIcon from '@/ui/ButtonIcon'
+import { toPersianDigits } from '@/utils/numberFormatter'
 import { BookmarkIcon, ChatBubbleLeftEllipsisIcon, HeartIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
 function PostIntractions({post}) {
+        
   return (
     <div className='flex items-center gap-x-4'>
         <ButtonIcon variant="secodary">
 <ChatBubbleLeftEllipsisIcon/>
-{post.commentsCount}
+{/* {toPersianDigits( post.commentsCount)} */}
         </ButtonIcon>
-                <ButtonIcon variant="secodary">
+                <ButtonIcon variant="red">
 <HeartIcon/>
-{post.LikesCount}
+{/* {toPersianDigits( post.LikesCount)} */}
+
         </ButtonIcon>
                 <ButtonIcon variant="secodary">
 <BookmarkIcon/>
