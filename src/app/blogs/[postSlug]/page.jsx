@@ -1,17 +1,40 @@
 import Image from "next/image";
 
+export async function generateMetadata({params}){
+const postSlug = params.postSlug
+const res = await fetch(
+  `http://localhost:5000/api/post/slug/${postSlug}`
+)
+
+const {data} = await res.json();
+if (!data || !data.post){
+  return {
+    title :' post cannot be found',
+description : ' null'
+  }
+}
+ const {post} = data;
+
+ 
+    return {
+    title : post.title,
+description: post.brieftext  
+  }
+ 
+}
+
+
+
 export default async function Page({ params }) {
-  const lug = await params.postSlug;
-  const res = await fetch(`http://localhost:5000/api/post/slug/${lug}`, {
+  const postSlug = await params.postSlug;
+  const res = await fetch(`http://localhost:5000/api/post/slug/${postSlug}`, {
     cache: 'no-store',
   });
 
   const json = await res.json();
   console.log('API response:', json);
 
-  if (!json?.data?.post) {
-    return <div className="p-6 text-red-500">Post not found</div>;
-  }
+
 
   const { post } = json.data;
 

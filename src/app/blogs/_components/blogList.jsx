@@ -44,7 +44,7 @@ async function BlogList() {
               </div>
             </div>
           </div>
-          <PostIntractions/>
+          <PostIntractions post={post}/>
         </div>
       ))}
     </div>

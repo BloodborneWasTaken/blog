@@ -1,6 +1,5 @@
 import vazirFont from "@/constants/localFont";
 import "@/styles/globals.css";
-import { Toaster } from "react-hot-toast";
 
 export const metadata = {
 

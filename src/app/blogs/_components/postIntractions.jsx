@@ -10,11 +10,11 @@ function PostIntractions({post}) {
     <div className='flex items-center gap-x-4'>
         <ButtonIcon variant="secodary">
 <ChatBubbleLeftEllipsisIcon/>
-{/* {toPersianDigits( post.commentsCount)} */}
+{toPersianDigits( post.commentsCount)}
         </ButtonIcon>
                 <ButtonIcon variant="red">
 <HeartIcon/>
-{/* {toPersianDigits( post.LikesCount)} */}
+{toPersianDigits( post.likesCount)}
 
         </ButtonIcon>
                 <ButtonIcon variant="secodary">
