@@ -1,9 +1,10 @@
 "use client";
-import useMoveback from "@/hooks/useMoveback";
+import useMoveBack from "@/hooks/useMoveBack";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 function NotFound() {
-const moveBack= useMoveback()
+  const moveBack = useMoveBack();
+
   return (
     <div className="container xl:max-w-screen-xl">
       <div className="flex justify-center pt-10">
@@ -12,11 +13,10 @@ const moveBack= useMoveback()
             صفحه ای که دنبالش بودید، پیدا نشد
           </h1>
           <button
+            onClick={moveBack}
             className="flex items-center gap-x-2 text-secondary-500"
           >
-            <ArrowRightIcon className="w-6 h-6 text-primary-900"
-            onClick={moveBack}
-            />
+            <ArrowRightIcon className="w-6 h-6 text-primary-900" />
             <span> برگشت</span>
           </button>
         </div>

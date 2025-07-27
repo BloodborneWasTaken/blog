@@ -1,8 +1,11 @@
-import {useRouter} from 'next/navigation'
+import { useRouter } from "next/navigation"
 
-function useMoveback() {
-const router = useRouter()
-return ()=> router.back()
+
+function useMoveBack() {
+    
+    const move = useRouter()
+
+    return ()=> move.back()
 }
 
-export default useMoveback
+export default useMoveBack

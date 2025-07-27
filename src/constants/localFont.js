@@ -1,6 +1,6 @@
 import LocalFont from "next/font/local";
 
-const vazir = LocalFont({
+const vazirFont = LocalFont({
   src: [
     {
       path: "../../public/fonts/vazir/Vazirmatn-Regular.woff2",
@@ -33,4 +33,4 @@ const vazir = LocalFont({
   display: "block",
 });
 
-export default vazir;
+export default vazirFont;

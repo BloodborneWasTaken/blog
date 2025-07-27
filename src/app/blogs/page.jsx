@@ -5,17 +5,17 @@ import Spinner from "@/ui/Spinner";
 
 export default function BlogPage({ children }) {
   return (
-    <div className="mr-3 bg-white">
+    <div className="flex flex-col mr-3 bg-primary">
    
-      <h1 className="text-lg font-bold mb-12 mr-5">لیست بلاگ ها</h1>
-      <div className="grid grid-cols-12 mr-4 gap-8">
-        <div className="col-span-12 lg:col-span-4 xl:col-span-3 text-secondary-500 space-y-4">
+      <h1 className="text-lg text-white font-bold mb-12 mr-5">لیست بلاگ ها</h1>
+      <div className="flex mr-4 gap-8">
+        <div className="flex text-secondary-500 space-y-4">
           <Suspense fallback={<Spinner />}>
             <CategoryList />
             <BlogList />
           </Suspense>
         </div>
-        <div className="col-span-12 lg:col-span-4 xl:col-span-9">{children}</div>
+        <div className="">{children}</div>
       </div>
     </div>
   );

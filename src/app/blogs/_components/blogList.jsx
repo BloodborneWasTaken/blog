@@ -3,21 +3,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { ClockIcon } from "@heroicons/react/24/outline";
 
-import CoverImage from './coverImage';
+import CoverImage from "./coverImage";
 import PostIntractions from "./postIntractions";
 
 async function BlogList() {
-  const res = await fetch(`http://localhost:5000/api/post/list`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`);
   const {
     data: { posts },
   } = await res.json();
 
   return posts.length > 0 ? (
-    <div className="grid grid-cols-12 gap-8">
+    <div className="grid grid-cols-12 gap-12">
       {posts.map((post) => (
-        <div className="col-span-12 sm:col-span-6 lg:col-span-4 border border-seondary-100 p-2 rounded-lg" key={post.id}>
-          <CoverImage post={post}/>
-          <div>
+        <div
+          className="col-span-12 sm:col-span-6 lg:col-span-4 border border-seondary-100 p-2 rounded-lg"
+          key={post.id}
+        >
+          <CoverImage post={post} />
+          <div className="gap-x-5">
             <Link href={`/blogs/${post.slug}`}>
               <h2 className="mb-4 font-bold text-secondary-700">
                 {post.title}
@@ -43,8 +46,8 @@ async function BlogList() {
                 <span>دقیقه</span>
               </div>
             </div>
+            <PostIntractions post={post} />
           </div>
-          <PostIntractions post={post}/>
         </div>
       ))}
     </div>
@@ -52,4 +55,3 @@ async function BlogList() {
 }
 
 export default BlogList;
-
