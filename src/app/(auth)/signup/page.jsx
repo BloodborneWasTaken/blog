@@ -1,63 +1,66 @@
 'use client';
 
-import { useState } from 'react'; 
-import { useForm } from 'react-hook-form'; 
 
-const TextField = ({ label, ...inputProps }) => {
-  return (
-    <div style={{ marginBottom: '15px' }}>
-      <label style={{ marginRight: '10px' }}>{label}:</label>
-      <input
-        {...inputProps} 
-        style={{ padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
-      />
-
-    </div>
-  );
-};
+import { useForm , submitHandler } from 'react-hook-form'; 
+import {yupResolver} from '@hookform/resolvers/yup'; 
+import * as yup from 'yup';
+import RHFTextField from '@/ui/RHFTextField';
+import Button from '@/ui/Button';
 
 
-function Page() {
+const schema = yup.object({
+  name: yup.string().required("نام اجباری می باشد").max(25).min(3, "نام حداق باید سه حرف باشد"),
+  email: yup.string().email().required(),
+  password :yup.string().required()
+})
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+function Signup() {
 
-  });
+const {
+  register,
+  handleSubmit,
+  formState : {errors , isLoading}
+} = useForm({
+  resolver : yupResolver(schema),
+mode: 'onTouched'
+})
 
-
-
-  // Your submit handler function
-  const onSubmit = (data) => {
-    console.log('Form Data:', data);
-  };
 
   return (
     <div className='bg-white'>
-      <h1>User Registration</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <h1>ثبت نام در وب سایت</h1>
+      <form action="" onSubmit={handleSubmit(onsubmit)} className="space-y-10">
 
 
-        <TextField
-          label="User Name"
-
-          {...register('userName', {
-            required: 'User name is required', 
-            minLength: {
-              value: 3,
-              message: 'Minimum length is 3 characters',
-            },
-          })}
-        />
-        {/* Display validation errors */}
-        {errors.userName && <p style={{ color: 'red' }}>{errors.userName.message}</p>}
-
-        {/* Add other fields here similarly */}
-        {/* <TextField label="Email" {...register('email', { required: true, pattern: /^\S+@\S+$/i })} /> */}
-        {/* {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>} */}
-
-
+       <RHFTextField
+       label="نام و نام خانوادگی"
+       name="name"
+       register={register}
+       isRequired
+      errors={errors}
+       />
+             
+      <RHFTextField
+       label="ایمیل"
+       name="email"
+       register={register}
+       isRequired
+       errors={errors}
+       dir='ltr'
+       />
+            
+      <RHFTextField
+       label="رمز عبور"
+       name="password"
+       register={register}
+       isRequired
+       errors={errors}
+       
+       />
+      <button type='submit'>submit</button>
       </form>
     </div>
   );
 }
 
-export default Page;
+export default Signup;
